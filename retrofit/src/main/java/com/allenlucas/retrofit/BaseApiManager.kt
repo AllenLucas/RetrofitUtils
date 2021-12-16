@@ -3,8 +3,6 @@ package com.allenlucas.retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,42 +13,17 @@ abstract class BaseApiManager {
 
     abstract fun getBaseUrl(): String
 
+    val okHttpClient = BaseOkHttpClient()
+
     protected val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(getBaseUrl())
-            .client(getOkhttpClient())
+            .client(okHttpClient.getClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    var timeOptions = ApiTimeOptions()  // 设置超时时间
-
-    // 获取okhttp client
-    private fun getOkhttpClient(): OkHttpClient =
-        OkHttpClient.Builder()
-            .readTimeout(
-                timeOptions.timeOutOptions.readTimeOut,
-                timeOptions.timeOutOptions.readTimeUnit
-            )
-            .connectTimeout(
-                timeOptions.timeOutOptions.connectTimeOut,
-                timeOptions.timeOutOptions.connectTimeUnit
-            )
-            .callTimeout(
-                timeOptions.timeOutOptions.callTimeOut,
-                timeOptions.timeOutOptions.connectTimeUnit
-            )
-            .writeTimeout(
-                timeOptions.timeOutOptions.writeTimeOut,
-                timeOptions.timeOutOptions.writeTimeUnit
-            ).apply {
-                if (BuildConfig.DEBUG) addInterceptor(
-                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-                )
-            }
-            .build()
-
-    fun <T> create(serviceClass: Class<T>) = retrofit.create(serviceClass)
+    fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
 
     /**
      * 网络

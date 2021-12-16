@@ -1,9 +1,9 @@
-package com.allenlucas.retrofit
+package com.allenlucas.retrofit.options
 
 import java.util.concurrent.TimeUnit
 
 /**
- * 网络请求配置
+ * 网络请求超时配置
  */
 class ApiTimeOptions {
 
