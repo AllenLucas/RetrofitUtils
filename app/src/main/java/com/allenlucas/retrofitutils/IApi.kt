@@ -1,5 +1,7 @@
 package com.allenlucas.retrofitutils
 
+import com.allenlucas.retrofitutils.entity.Banner
+import com.allenlucas.retrofitutils.entity.ResponseResult
 import retrofit2.http.GET
 
 interface IApi {

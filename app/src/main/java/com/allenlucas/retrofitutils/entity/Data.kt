@@ -1,4 +1,4 @@
-package com.allenlucas.retrofitutils
+package com.allenlucas.retrofitutils.entity
 
 import com.allenlucas.retrofit.BaseResult
 

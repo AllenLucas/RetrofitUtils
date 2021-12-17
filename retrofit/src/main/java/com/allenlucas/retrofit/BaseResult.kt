@@ -1,9 +1,11 @@
 package com.allenlucas.retrofit
 
+import java.io.Serializable
+
 /**
  * 封装基类返回数据
  */
-abstract class BaseResult<T> {
+abstract class BaseResult<T> : Serializable {
 
     var code: Int = -1
     var msg: String = ""
