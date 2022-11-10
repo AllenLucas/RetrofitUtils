@@ -117,9 +117,9 @@
 -keep class com.allenlucas.retrofit.ApiException
 -keep class com.allenlucas.retrofit.BaseOkHttpClient
 
--keep class com.allenlucas.retrofit.BaseResult
+-keep class com.allenlucas.retrofit.ResultData
 -keep class com.allenlucas.retrofit.BaseApiManager
 
 
 -keep public class * extends com.allenlucas.retrofit.BaseApiManager
--keep public class * extends com.allenlucas.retrofit.BaseResult
+-keep public class * extends com.allenlucas.retrofit.ResultData

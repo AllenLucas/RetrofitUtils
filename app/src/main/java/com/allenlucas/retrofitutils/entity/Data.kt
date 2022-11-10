@@ -1,6 +1,7 @@
 package com.allenlucas.retrofitutils.entity
 
-import com.allenlucas.retrofit.BaseResult
+import com.allenlucas.retrofit.ResultData
+import com.google.gson.annotations.SerializedName
 
 data class Banner(
     var id: Long = 0,
@@ -10,12 +11,9 @@ data class Banner(
 )
 
 data class ResponseResult<T>(
-    var errorCode: Int = -1,
-    var errorMsg: String? = ""
-) : BaseResult<T>() {
-    override fun isSuccess() = errorCode == 0
-
-    override fun getRequestData() = data
-
-    override fun getRequestMsg() = errorMsg ?: ""
+    @SerializedName("errorCode") override var code:Int,
+    @SerializedName("errorMsg") override var message: String,
+    @SerializedName("data") override var data: T?
+):ResultData<T> {
+    override fun isSuccess(): Boolean = code == 0
 }

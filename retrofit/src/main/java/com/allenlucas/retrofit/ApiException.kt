@@ -10,7 +10,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class ApiException(
-    val code: Int,
+    private val code: Int,
     override val message: String?,
     override val cause: Throwable? = null
 ) : RuntimeException(message, cause) {
@@ -33,9 +33,6 @@ class ApiException(
         }
     }
 
-    fun <T, R : BaseResult<T>> toBaseResult(emptyResult: R) =
-        emptyResult.apply {
-            this.code = this@ApiException.code
-            this.msg = this@ApiException.message ?: ""
-        }
+    fun <T> toResponse(): ResultData<T> = NetError(code, message ?: "")
+
 }

@@ -106,4 +106,4 @@
 
 
 -keep public class * extends com.allenlucas.retrofit.BaseApiManager
--keep public class * extends com.allenlucas.retrofit.BaseResult
+-keep public class * extends com.allenlucas.retrofit.ResultData

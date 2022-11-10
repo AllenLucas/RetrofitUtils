@@ -8,17 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModel by lazy { ViewModelProvider(this)[BaseViewModel::class.java] }
+    val viewModel: BaseViewModel by lazy { ViewModelProvider(this)[BaseViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ApiManager.instance.okHttpClient.timeOptions.apply {
-            readTimeout(5)
-            connectTimeout(5)
-            callTimeout(5)
-            writeTimeout(5)
-        }
+        ApiManager.instance.initOkHttpClient()
         findViewById<View>(R.id.tv_content).setOnClickListener {
             Log.e("lal", "start time:${System.currentTimeMillis()}")
             viewModel.getBanner()
